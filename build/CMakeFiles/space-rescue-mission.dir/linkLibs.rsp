@@ -1,0 +1,1 @@
+ "external/ftxui/libftxui-screen.a" "external/ftxui/libftxui-dom.a" "external/ftxui/libftxui-component.a" "external/ftxui/libftxui-dom.a" "external/ftxui/libftxui-screen.a" -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

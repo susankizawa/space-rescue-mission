@@ -1,0 +1,9 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define MAX_SIZE 100
+#define MAX_STRING_LENGTH 50
+#define ENABLE_LOGGER true
+#define ENABLE_DEBUG_MODE true
+
+#endif
