@@ -1,99 +1,130 @@
 #include "logger.h"
 
-#include <fstream>
-#include <cstdio>
-#include <string>
-
 #include "config.h"
 #include "utils.h"
 
-const std::string logsPath = "../logs/";
-std::string filePath;
+#include <fstream>
+#include <cstdio>
+#include <cstdarg>
+#include <cstring>
+ 
+const char logsPath[] = "../logs/";
+char filePath[MAX_PATH_LENGTH];
 
 std::ofstream currentSessionLog;
 
-LogMessage newLogMessage(std::string timestamp, std::string prefix, std::string message) {
+LogMessage newLogMessage(const char timestamp[], const char prefix[], const char message[]) {
   LogMessage newLogMsg;
-  newLogMsg.timestamp = timestamp;
-  newLogMsg.prefix = prefix;
-  newLogMsg.message = message;
-  newLogMsg.fullMessage = "[" + timestamp + "] [" + prefix + "]: " + message + "\n";
+  strcpy(newLogMsg.timestamp, timestamp);
+  strcpy(newLogMsg.prefix, prefix);
+  strcpy(newLogMsg.message, message);
+  sprintf(newLogMsg.fullMessage, "[%s] [%s]: %s\n", timestamp, prefix, message);
   return newLogMsg;
 }
 
 void initializeLogger() {
   if(ENABLE_LOGGER){
-    filePath = logsPath + getCurrentTimestamp("%d-%m-%Y") + ".log";
-    currentSessionLog.open(filePath.c_str(), std::ios::app);
-  }
-  log("Logger initialized!");
-}
-
-void log(const std::string& message) {
-  LogMessage logMsg = newLogMessage(getCurrentTimestamp("%H:%M:%S"), "LOG", message);
-
-  if(ENABLE_DEBUG_MODE) {
-    printf(logMsg.fullMessage.c_str());
-  }
-
-  if(ENABLE_LOGGER) {
-    currentSessionLog << logMsg.fullMessage;
+    char currentTimestamp[MAX_TIMESTAMP_LENGTH];
+    getCurrentTimestamp("%d-%m-%Y", currentTimestamp, MAX_TIMESTAMP_LENGTH);
+    sprintf(filePath, "%s%s.log", logsPath, currentTimestamp);
+    currentSessionLog.open(filePath, std::ios::app);
+    info("Logger initialized!");
+  } else {
+    printf("Logger is disabled.");
   }
 }
 
-void info(const std::string& message) {
-  LogMessage logMsg = newLogMessage(getCurrentTimestamp("%H:%M:%S"), "INFO", message);
+LogMessage buildMessage(const char* prefix, const char* format, va_list args) {
+  char buffer[MAX_MESSAGE_LENGTH];
+  char currentTimestamp[MAX_TIMESTAMP_LENGTH];
 
+  vsnprintf(buffer, sizeof(buffer), format, args);
+
+  LogMessage msg;
+
+  getCurrentTimestamp("%H:%M:%S", currentTimestamp, MAX_TIMESTAMP_LENGTH);
+
+  strcpy(msg.timestamp, currentTimestamp);
+  strcpy(msg.prefix, prefix);
+  strcpy(msg.message, buffer);
+
+  sprintf(msg.fullMessage, "[%s] [%s]: %s\n", msg.timestamp, msg.prefix, msg.message);
+
+  return msg;
+}
+
+void handleLogOutput(char message[]) {
   if(ENABLE_DEBUG_MODE) {
-    printf(logMsg.fullMessage.c_str());
+    printf("%s", message);
   }
 
   if(ENABLE_LOGGER) {
-    currentSessionLog << logMsg.fullMessage;
+    if (!currentSessionLog.is_open()){
+      return;
+    }
+
+    currentSessionLog << message;
+    currentSessionLog.flush();
   }
 }
 
-void error(const std::string& message) {
-  LogMessage logMsg = newLogMessage(getCurrentTimestamp("%H:%M:%S"), "ERROR", message);
-
-  if(ENABLE_DEBUG_MODE) {
-    printf(logMsg.fullMessage.c_str());
-  }
-
-  if(ENABLE_LOGGER) {
-    currentSessionLog << logMsg.fullMessage;
-  }
+void log(const char* prefix, const char* format, ...) {
+  va_list args;
+  va_start(args, format);
+  LogMessage msg = buildMessage(prefix, format, args);
+  handleLogOutput(msg.fullMessage);
+  va_end(args);
 }
 
-void warning(const std::string& message) {
-  LogMessage logMsg = newLogMessage(getCurrentTimestamp("%H:%M:%S"), "WARNING", message);
-
-  if(ENABLE_DEBUG_MODE) {
-    printf(logMsg.fullMessage.c_str());
-  }
-
-  if(ENABLE_LOGGER) {
-    currentSessionLog << logMsg.fullMessage;
-  }
+void info(const char* format, ...) {
+  va_list args;
+  va_start(args, format);
+  LogMessage msg = buildMessage("INFO", format, args);
+  handleLogOutput(msg.fullMessage);
+  va_end(args);
 }
 
-void debug(const std::string& message) {
-  LogMessage logMsg = newLogMessage(getCurrentTimestamp("%H:%M:%S"), "DEBUG", message);
+void error(const char* format, ...) {
+  va_list args;
+  va_start(args, format);
+  LogMessage msg = buildMessage("ERROR", format, args);
+  handleLogOutput(msg.fullMessage);
+  va_end(args);
+}
 
-  if(ENABLE_DEBUG_MODE) {
-    printf(logMsg.fullMessage.c_str());
-  }
+void warning(const char* format, ...) {
+  va_list args;
+  va_start(args, format);
+  LogMessage msg = buildMessage("WARNING", format, args);
+  handleLogOutput(msg.fullMessage);
+  va_end(args);
+}
 
-  if(ENABLE_LOGGER) {
-    currentSessionLog << logMsg.fullMessage;
-  }
+void debug(const char* format, ...) {
+  va_list args;
+  va_start(args, format);
+  LogMessage msg = buildMessage("DEBUG", format, args);
+  handleLogOutput(msg.fullMessage);
+  va_end(args);
+}
+
+void append(const char* format, ...) {
+  char buffer[MAX_MESSAGE_LENGTH];
+
+  va_list args;
+  va_start(args, format);
+  vsnprintf(buffer, sizeof(buffer), format, args);
+  va_end(args);
+
+  handleLogOutput(buffer);
 }
 
 void clear() {
   currentSessionLog.close();
-  currentSessionLog.open(filePath.c_str());
+  currentSessionLog.open(filePath);
 }
 
 void cleanupLogger() {
-    currentSessionLog.close();
+  info("Cleaning up logger...");
+  currentSessionLog.close();
 }

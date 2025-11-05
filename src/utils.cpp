@@ -6,10 +6,8 @@
 #include <sstream>
 #include <iomanip>
 
-std::string getCurrentTimestamp(const std::string& format) {
+void getCurrentTimestamp(const char format[], char buffer[], size_t bufferSize) {
   auto now = std::chrono::system_clock::now();
-    auto time = std::chrono::system_clock::to_time_t(now);
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), format.c_str());
-    return ss.str();
+  auto time = std::chrono::system_clock::to_time_t(now);
+  strftime(buffer, bufferSize, format, std::localtime(&time));
 }

@@ -3,6 +3,6 @@
 
 #include <string>
 
-std::string getCurrentTimestamp(const std::string& format);
+void getCurrentTimestamp(const char format[], char buffer[], size_t bufferSize);
 
 #endif

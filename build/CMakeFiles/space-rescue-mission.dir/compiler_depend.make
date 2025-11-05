@@ -85,6 +85,7 @@ CMakeFiles/space-rescue-mission.dir/src/dataLoader.cpp.obj: D:/Projects/C++/spac
   D:/msys64/ucrt64/include/c++/15.2.0/cstddef \
   D:/msys64/ucrt64/include/c++/15.2.0/cstdio \
   D:/msys64/ucrt64/include/c++/15.2.0/cstdlib \
+  D:/msys64/ucrt64/include/c++/15.2.0/cstring \
   D:/msys64/ucrt64/include/c++/15.2.0/cwchar \
   D:/msys64/ucrt64/include/c++/15.2.0/cwctype \
   D:/msys64/ucrt64/include/c++/15.2.0/debug/assertions.h \
@@ -99,6 +100,7 @@ CMakeFiles/space-rescue-mission.dir/src/dataLoader.cpp.obj: D:/Projects/C++/spac
   D:/msys64/ucrt64/include/c++/15.2.0/initializer_list \
   D:/msys64/ucrt64/include/c++/15.2.0/ios \
   D:/msys64/ucrt64/include/c++/15.2.0/iosfwd \
+  D:/msys64/ucrt64/include/c++/15.2.0/iostream \
   D:/msys64/ucrt64/include/c++/15.2.0/istream \
   D:/msys64/ucrt64/include/c++/15.2.0/new \
   D:/msys64/ucrt64/include/c++/15.2.0/ostream \
@@ -148,12 +150,14 @@ CMakeFiles/space-rescue-mission.dir/src/dataLoader.cpp.obj: D:/Projects/C++/spac
   D:/msys64/ucrt64/include/sdks/_mingw_ddk.h \
   D:/msys64/ucrt64/include/sec_api/stdio_s.h \
   D:/msys64/ucrt64/include/sec_api/stdlib_s.h \
+  D:/msys64/ucrt64/include/sec_api/string_s.h \
   D:/msys64/ucrt64/include/sec_api/sys/timeb_s.h \
   D:/msys64/ucrt64/include/sec_api/wchar_s.h \
   D:/msys64/ucrt64/include/signal.h \
   D:/msys64/ucrt64/include/stddef.h \
   D:/msys64/ucrt64/include/stdio.h \
   D:/msys64/ucrt64/include/stdlib.h \
+  D:/msys64/ucrt64/include/string.h \
   D:/msys64/ucrt64/include/swprintf.inl \
   D:/msys64/ucrt64/include/sys/timeb.h \
   D:/msys64/ucrt64/include/sys/types.h \
@@ -333,6 +337,7 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj: D:/Projects/C++/space-re
   D:/msys64/ucrt64/include/_mingw_off_t.h \
   D:/msys64/ucrt64/include/_mingw_secapi.h \
   D:/msys64/ucrt64/include/_mingw_stat64.h \
+  D:/msys64/ucrt64/include/_mingw_stdarg.h \
   D:/msys64/ucrt64/include/_timeval.h \
   D:/msys64/ucrt64/include/c++/15.2.0/backward/binders.h \
   D:/msys64/ucrt64/include/c++/15.2.0/bit \
@@ -398,9 +403,11 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj: D:/Projects/C++/space-re
   D:/msys64/ucrt64/include/c++/15.2.0/cerrno \
   D:/msys64/ucrt64/include/c++/15.2.0/clocale \
   D:/msys64/ucrt64/include/c++/15.2.0/concepts \
+  D:/msys64/ucrt64/include/c++/15.2.0/cstdarg \
   D:/msys64/ucrt64/include/c++/15.2.0/cstddef \
   D:/msys64/ucrt64/include/c++/15.2.0/cstdio \
   D:/msys64/ucrt64/include/c++/15.2.0/cstdlib \
+  D:/msys64/ucrt64/include/c++/15.2.0/cstring \
   D:/msys64/ucrt64/include/c++/15.2.0/cwchar \
   D:/msys64/ucrt64/include/c++/15.2.0/cwctype \
   D:/msys64/ucrt64/include/c++/15.2.0/debug/assertions.h \
@@ -462,12 +469,15 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj: D:/Projects/C++/space-re
   D:/msys64/ucrt64/include/sdks/_mingw_ddk.h \
   D:/msys64/ucrt64/include/sec_api/stdio_s.h \
   D:/msys64/ucrt64/include/sec_api/stdlib_s.h \
+  D:/msys64/ucrt64/include/sec_api/string_s.h \
   D:/msys64/ucrt64/include/sec_api/sys/timeb_s.h \
   D:/msys64/ucrt64/include/sec_api/wchar_s.h \
   D:/msys64/ucrt64/include/signal.h \
+  D:/msys64/ucrt64/include/stdarg.h \
   D:/msys64/ucrt64/include/stddef.h \
   D:/msys64/ucrt64/include/stdio.h \
   D:/msys64/ucrt64/include/stdlib.h \
+  D:/msys64/ucrt64/include/string.h \
   D:/msys64/ucrt64/include/swprintf.inl \
   D:/msys64/ucrt64/include/sys/timeb.h \
   D:/msys64/ucrt64/include/sys/types.h \
@@ -477,6 +487,7 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj: D:/Projects/C++/space-re
   D:/msys64/ucrt64/include/wctype.h \
   D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/limits.h \
   D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/mm_malloc.h \
+  D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h \
   D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h \
   D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h
 
@@ -1070,6 +1081,8 @@ D:/msys64/ucrt64/include/c++/15.2.0/ratio:
 
 D:/msys64/ucrt64/include/c++/15.2.0/ctime:
 
+D:/msys64/ucrt64/include/c++/15.2.0/bits/locale_facets_nonio.h:
+
 D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/gthr.h:
 
 D:/msys64/ucrt64/include/sec_api/wchar_s.h:
@@ -1110,6 +1123,8 @@ D:/msys64/ucrt64/include/c++/15.2.0/pstl/pstl_config.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/cwchar:
 
+D:/msys64/ucrt64/include/c++/15.2.0/iostream:
+
 D:/msys64/ucrt64/include/c++/15.2.0/iosfwd:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/exception_defines.h:
@@ -1131,6 +1146,12 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/allocated_ptr.h:
 D:/msys64/ucrt64/include/c++/15.2.0/bits/memoryfwd.h:
 
 D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/dom/deprecated.hpp:
+
+D:/msys64/ucrt64/include/c++/15.2.0/cstring:
+
+D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_pair.h:
+
+D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/util/ref.hpp:
 
 D:/msys64/ucrt64/include/c++/15.2.0/cstdio:
 
@@ -1202,6 +1223,12 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/nested_exception.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/basic_string.tcc:
 
+D:/msys64/ucrt64/include/c++/15.2.0/chrono:
+
+D:/msys64/ucrt64/include/c++/15.2.0/initializer_list:
+
+D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/screen.hpp:
+
 D:/msys64/ucrt64/include/c++/15.2.0/bits/charconv.h:
 
 D:/msys64/ucrt64/include/_mingw_secapi.h:
@@ -1266,19 +1293,11 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/hash_bytes.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/istream:
 
-D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_pair.h:
-
-D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/util/ref.hpp:
-
-D:/msys64/ucrt64/include/c++/15.2.0/cstring:
-
 D:/msys64/ucrt64/include/c++/15.2.0/variant:
 
 D:/Projects/C++/space-rescue-mission/include/logger.h:
 
 D:/msys64/ucrt64/include/stddef.h:
-
-D:/msys64/ucrt64/include/c++/15.2.0/bits/locale_facets_nonio.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bit:
 
@@ -1310,6 +1329,12 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_queue.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/backward/binders.h:
 
+D:/msys64/ucrt64/include/c++/15.2.0/bits/locale_facets_nonio.tcc:
+
+D:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator.h:
+
+D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_raw_storage_iter.h:
+
 D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/basic_file.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/shared_ptr_base.h:
@@ -1317,8 +1342,6 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/shared_ptr_base.h:
 D:/msys64/ucrt64/include/c++/15.2.0/bits/basic_ios.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/locale_facets.tcc:
-
-D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/os_defines.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/postypes.h:
 
@@ -1386,6 +1409,10 @@ D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/sstream.tcc:
 
+D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h:
+
+D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/os_defines.h:
+
 D:/msys64/ucrt64/include/c++/15.2.0/bits/istream.tcc:
 
 D:/msys64/ucrt64/include/corecrt_startup.h:
@@ -1404,12 +1431,6 @@ D:/msys64/ucrt64/include/errno.h:
 
 D:/msys64/ucrt64/include/locale.h:
 
-D:/msys64/ucrt64/include/c++/15.2.0/debug/debug.h:
-
-D:/msys64/ucrt64/include/c++/15.2.0/bits/basic_string.h:
-
-D:/msys64/ucrt64/include/malloc.h:
-
 D:/msys64/ucrt64/include/process.h:
 
 D:/msys64/ucrt64/include/pthread.h:
@@ -1424,13 +1445,15 @@ D:/Projects/C++/space-rescue-mission/src/stationNetwork.cpp:
 
 D:/msys64/ucrt64/include/c++/15.2.0/tr1/gamma.tcc:
 
-D:/msys64/ucrt64/include/corecrt.h:
-
 D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/dom/take_any_args.hpp:
+
+D:/msys64/ucrt64/include/corecrt.h:
 
 D:/msys64/ucrt64/include/stdio.h:
 
 D:/msys64/ucrt64/include/stdlib.h:
+
+D:/msys64/ucrt64/include/string.h:
 
 D:/msys64/ucrt64/include/swprintf.inl:
 
@@ -1439,6 +1462,14 @@ D:/msys64/ucrt64/include/c++/15.2.0/tr1/poly_hermite.tcc:
 D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/color.hpp:
 
 D:/msys64/ucrt64/include/sys/timeb.h:
+
+D:/msys64/ucrt64/include/c++/15.2.0/debug/debug.h:
+
+D:/msys64/ucrt64/include/c++/15.2.0/bits/basic_string.h:
+
+D:/msys64/ucrt64/include/malloc.h:
+
+D:/msys64/ucrt64/include/stdarg.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/utility.h:
 
@@ -1451,6 +1482,12 @@ D:/Projects/C++/space-rescue-mission/src/graph.cpp:
 D:/Projects/C++/space-rescue-mission/src/logger.cpp:
 
 D:/Projects/C++/space-rescue-mission/include/utils.h:
+
+D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_tempbuf.h:
+
+D:/msys64/ucrt64/include/c++/15.2.0/cstdarg:
+
+D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/box.hpp:
 
 D:/Projects/C++/space-rescue-mission/src/main.cpp:
 
@@ -1472,11 +1509,11 @@ D:/msys64/ucrt64/include/corecrt_wstdlib.h:
 
 D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/dom/selection.hpp:
 
-D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/box.hpp:
-
 D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/image.hpp:
 
 D:/msys64/ucrt64/include/c++/15.2.0/tr1/exp_integral.tcc:
+
+D:/msys64/ucrt64/include/_mingw_stdarg.h:
 
 D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/pixel.hpp:
 
@@ -1512,8 +1549,6 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_heap.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_stack.h:
 
-D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_tempbuf.h:
-
 D:/msys64/ucrt64/include/c++/15.2.0/bits/unique_ptr.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/cmath:
@@ -1542,8 +1577,6 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/basic_ios.tcc:
 
 D:/msys64/ucrt64/include/c++/15.2.0/tr1/legendre_function.tcc:
 
-D:/msys64/ucrt64/include/c++/15.2.0/iostream:
-
 D:/msys64/ucrt64/include/c++/15.2.0/limits:
 
 D:/msys64/ucrt64/include/c++/15.2.0/pstl/execution_defs.h:
@@ -1560,8 +1593,6 @@ D:/msys64/ucrt64/include/c++/15.2.0/bits/std_function.h:
 
 D:/msys64/ucrt64/include/stdint.h:
 
-D:/msys64/ucrt64/include/string.h:
-
 D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdint.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/format:
@@ -1575,15 +1606,3 @@ D:/Projects/C++/space-rescue-mission/src/utils.cpp:
 D:/msys64/ucrt64/include/_timeval.h:
 
 D:/msys64/ucrt64/include/c++/15.2.0/bits/chrono.h:
-
-D:/msys64/ucrt64/include/c++/15.2.0/bits/uses_allocator.h:
-
-D:/msys64/ucrt64/include/c++/15.2.0/bits/stl_raw_storage_iter.h:
-
-D:/msys64/ucrt64/include/c++/15.2.0/bits/locale_facets_nonio.tcc:
-
-D:/msys64/ucrt64/include/c++/15.2.0/initializer_list:
-
-D:/Projects/C++/space-rescue-mission/external/ftxui/include/ftxui/screen/screen.hpp:
-
-D:/msys64/ucrt64/include/c++/15.2.0/chrono:

@@ -86,6 +86,7 @@ CMakeFiles/space-rescue-mission.dir/src/dataLoader.cpp.obj
  D:/msys64/ucrt64/include/c++/15.2.0/cstddef
  D:/msys64/ucrt64/include/c++/15.2.0/cstdio
  D:/msys64/ucrt64/include/c++/15.2.0/cstdlib
+ D:/msys64/ucrt64/include/c++/15.2.0/cstring
  D:/msys64/ucrt64/include/c++/15.2.0/cwchar
  D:/msys64/ucrt64/include/c++/15.2.0/cwctype
  D:/msys64/ucrt64/include/c++/15.2.0/debug/assertions.h
@@ -100,6 +101,7 @@ CMakeFiles/space-rescue-mission.dir/src/dataLoader.cpp.obj
  D:/msys64/ucrt64/include/c++/15.2.0/initializer_list
  D:/msys64/ucrt64/include/c++/15.2.0/ios
  D:/msys64/ucrt64/include/c++/15.2.0/iosfwd
+ D:/msys64/ucrt64/include/c++/15.2.0/iostream
  D:/msys64/ucrt64/include/c++/15.2.0/istream
  D:/msys64/ucrt64/include/c++/15.2.0/new
  D:/msys64/ucrt64/include/c++/15.2.0/ostream
@@ -149,12 +151,14 @@ CMakeFiles/space-rescue-mission.dir/src/dataLoader.cpp.obj
  D:/msys64/ucrt64/include/sdks/_mingw_ddk.h
  D:/msys64/ucrt64/include/sec_api/stdio_s.h
  D:/msys64/ucrt64/include/sec_api/stdlib_s.h
+ D:/msys64/ucrt64/include/sec_api/string_s.h
  D:/msys64/ucrt64/include/sec_api/sys/timeb_s.h
  D:/msys64/ucrt64/include/sec_api/wchar_s.h
  D:/msys64/ucrt64/include/signal.h
  D:/msys64/ucrt64/include/stddef.h
  D:/msys64/ucrt64/include/stdio.h
  D:/msys64/ucrt64/include/stdlib.h
+ D:/msys64/ucrt64/include/string.h
  D:/msys64/ucrt64/include/swprintf.inl
  D:/msys64/ucrt64/include/sys/timeb.h
  D:/msys64/ucrt64/include/sys/types.h
@@ -336,6 +340,7 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj
  D:/msys64/ucrt64/include/_mingw_off_t.h
  D:/msys64/ucrt64/include/_mingw_secapi.h
  D:/msys64/ucrt64/include/_mingw_stat64.h
+ D:/msys64/ucrt64/include/_mingw_stdarg.h
  D:/msys64/ucrt64/include/_timeval.h
  D:/msys64/ucrt64/include/c++/15.2.0/backward/binders.h
  D:/msys64/ucrt64/include/c++/15.2.0/bit
@@ -401,9 +406,11 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj
  D:/msys64/ucrt64/include/c++/15.2.0/cerrno
  D:/msys64/ucrt64/include/c++/15.2.0/clocale
  D:/msys64/ucrt64/include/c++/15.2.0/concepts
+ D:/msys64/ucrt64/include/c++/15.2.0/cstdarg
  D:/msys64/ucrt64/include/c++/15.2.0/cstddef
  D:/msys64/ucrt64/include/c++/15.2.0/cstdio
  D:/msys64/ucrt64/include/c++/15.2.0/cstdlib
+ D:/msys64/ucrt64/include/c++/15.2.0/cstring
  D:/msys64/ucrt64/include/c++/15.2.0/cwchar
  D:/msys64/ucrt64/include/c++/15.2.0/cwctype
  D:/msys64/ucrt64/include/c++/15.2.0/debug/assertions.h
@@ -465,12 +472,15 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj
  D:/msys64/ucrt64/include/sdks/_mingw_ddk.h
  D:/msys64/ucrt64/include/sec_api/stdio_s.h
  D:/msys64/ucrt64/include/sec_api/stdlib_s.h
+ D:/msys64/ucrt64/include/sec_api/string_s.h
  D:/msys64/ucrt64/include/sec_api/sys/timeb_s.h
  D:/msys64/ucrt64/include/sec_api/wchar_s.h
  D:/msys64/ucrt64/include/signal.h
+ D:/msys64/ucrt64/include/stdarg.h
  D:/msys64/ucrt64/include/stddef.h
  D:/msys64/ucrt64/include/stdio.h
  D:/msys64/ucrt64/include/stdlib.h
+ D:/msys64/ucrt64/include/string.h
  D:/msys64/ucrt64/include/swprintf.inl
  D:/msys64/ucrt64/include/sys/timeb.h
  D:/msys64/ucrt64/include/sys/types.h
@@ -480,6 +490,7 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj
  D:/msys64/ucrt64/include/wctype.h
  D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/limits.h
  D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/mm_malloc.h
+ D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h
  D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stddef.h
  D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/syslimits.h
 

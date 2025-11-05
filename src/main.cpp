@@ -1,3 +1,13 @@
+#include "config.h"
+#include "graph.h"
+#include "stationNetwork.h"
+#include "logger.h"
+#include "dataLoader.h"
+
+#include "ftxui/dom/canvas.hpp"  // for Canvas
+#include "ftxui/dom/node.hpp"    // for Render
+#include "ftxui/screen/color.hpp"  // for Color, Color::Red, Color::Blue, Color::Green, ftxui
+
 #include <stdio.h>                 // for getchar
 #include <stdlib.h>
 #include <string.h>
@@ -11,15 +21,8 @@
 #include <string>
 #include <iostream>
 
-#include "ftxui/dom/canvas.hpp"  // for Canvas
-#include "ftxui/dom/node.hpp"    // for Render
-#include "ftxui/screen/color.hpp"  // for Color, Color::Red, Color::Blue, Color::Green, ftxui
 
-#include "config.h"
-#include "graph.h"
-#include "stationNetwork.h"
-#include "logger.h"
-#include "dataLoader.h"
+
 
 StationNetwork* stationNetwork = (StationNetwork*) malloc(sizeof(StationNetwork));
 
@@ -35,7 +38,7 @@ int main() {
 
   initializeLogger();
 
-  std::vector<Station> data = loadNetworkData("../data/estacoeserotas (1).csv");
+  std::vector<Station> data = loadNetworkData("../data/estacoeserotas (1) copy.csv");
 
   buildNetworkFromData(stationNetwork, data);
 

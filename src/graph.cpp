@@ -7,6 +7,7 @@
 #include "logger.h"
 
 void initializeGraph(Graph* graph, int numVertices, int isDirectional) {
+  info("Initializing graph...");
   graph->numVertices = numVertices;
   graph->isDirectional = isDirectional;
   for(int i = 0; i < MAX_SIZE; i++) {
@@ -14,12 +15,13 @@ void initializeGraph(Graph* graph, int numVertices, int isDirectional) {
       graph->adjMatrix[i][j] = 0;
     }
   }
+  info("Graph initialized!");
 }
 
-void addEdge(Graph* graph, int u, int v) {
-  graph->adjMatrix[u][v] = 1;
+void addEdge(Graph* graph, int u, int v, int weight) {
+  graph->adjMatrix[u][v] = weight;
   if(!graph->isDirectional){
-    graph->adjMatrix[v][u] = 1;
+    graph->adjMatrix[v][u] = weight;
   }
 }
 
@@ -31,16 +33,11 @@ void removeEdge(Graph* graph, int u, int v) {
 }
 
 void printMatrix(int matrix[][MAX_SIZE], int width, int height) {
-  std::ostringstream msg;
-
-  msg << "\n";
-
+  debug("Matrix:");
   for(int i = 0; i < width; i++) {
     for(int j = 0; j < height; j++) {
-      msg << "[" << matrix[i][j] << "]";
+      append("[ %-3d ]", matrix[i][j]);
     }
-    msg << "\n";
+    append("\n");
   }
-
-  debug(msg.str());
 }

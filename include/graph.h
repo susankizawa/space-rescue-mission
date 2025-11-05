@@ -11,7 +11,7 @@ typedef struct Graph {
 
 void initializeGraph(Graph* graph, int numVertices, int isDirectional);
 
-void addEdge(Graph* graph, int u, int v);
+void addEdge(Graph* graph, int u, int v, int weight = 1);
 
 void removeEdge(Graph* graph, int u, int v);
 

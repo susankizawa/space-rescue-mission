@@ -1,6 +1,7 @@
 CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj: \
  D:\Projects\C++\space-rescue-mission\src\logger.cpp \
  D:/Projects/C++/space-rescue-mission/include/logger.h \
+ D:/Projects/C++/space-rescue-mission/include/config.h \
  D:/msys64/ucrt64/include/c++/15.2.0/fstream \
  D:/msys64/ucrt64/include/c++/15.2.0/bits/requires_hosted.h \
  D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -145,4 +146,11 @@ CMakeFiles/space-rescue-mission.dir/src/logger.cpp.obj: \
  D:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32/bits/c++io.h \
  D:/msys64/ucrt64/include/c++/15.2.0/bits/fstream.tcc \
  D:/Projects/C++/space-rescue-mission/include/config.h \
- D:/Projects/C++/space-rescue-mission/include/utils.h
+ D:/Projects/C++/space-rescue-mission/include/utils.h \
+ D:/msys64/ucrt64/include/c++/15.2.0/cstdarg \
+ D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h \
+ D:/msys64/ucrt64/include/stdarg.h \
+ D:/msys64/ucrt64/include/_mingw_stdarg.h \
+ D:/msys64/ucrt64/include/c++/15.2.0/cstring \
+ D:/msys64/ucrt64/include/string.h \
+ D:/msys64/ucrt64/include/sec_api/string_s.h
