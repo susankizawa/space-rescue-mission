@@ -1,0 +1,26 @@
+# Build artifacts
+build/
+*.exe
+*.o
+*.obj
+
+# Logs
+logs/
+*.log
+
+# VS Code
+.vscode/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Submodules
+# external/
+
+# WebAssembly/starter leftovers
+snap/
+*.wasm
+index.html
