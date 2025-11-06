@@ -3,14 +3,15 @@
 #include "stationNetwork.h"
 #include "logger.h"
 #include "dataLoader.h"
+#include "dijkstra.h"
 
 #include "ftxui/dom/canvas.hpp"  // for Canvas
 #include "ftxui/dom/node.hpp"    // for Render
 #include "ftxui/screen/color.hpp"  // for Color, Color::Red, Color::Blue, Color::Green, ftxui
 
-#include <stdio.h>                 // for getchar
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>                 // for getchar
+#include <cstdlib>
+#include <cstring>
 #include <cmath>                   // for cos
 #include <ftxui/dom/elements.hpp>  // for Fit, canvas, operator|, border, Element
 #include <ftxui/screen/screen.hpp>  // for Pixel, Screen
@@ -20,9 +21,6 @@
 #include <sstream>
 #include <string>
 #include <iostream>
-
-
-
 
 StationNetwork* stationNetwork = (StationNetwork*) malloc(sizeof(StationNetwork));
 
@@ -38,13 +36,41 @@ int main() {
 
   initializeLogger();
 
+  /*
+  std::string imagePath = "D:/Projects/C++/space-rescue-mission/images/graph.png"; // Replace with your image path
+
+  #ifdef _WIN32 // For Windows
+      std::string command = "start " + imagePath;
+  #elif __APPLE__ // For macOS
+      std::string command = "open " + imagePath;
+  #else // For Linux/Unix-like systems
+      std::string command = "xdg-open " + imagePath; // or "eog", "gwenview", etc.
+  #endif
+
+  std::system(command.c_str());
+  */
+
   std::vector<Station> data = loadNetworkData("../data/estacoeserotas (1) copy.csv");
 
   buildNetworkFromData(stationNetwork, data);
 
-  printStationNetworkInfo(stationNetwork);
+  int earthIndex = getStationIndex(stationNetwork, "Earth");
+  int centauriIndex = getStationIndex(stationNetwork, "Centauri");
+  int path[MAX_SIZE];
+  int pathLength = 0;
 
-  printStationNetwork(stationNetwork);
+  dijkstra(&stationNetwork->routes, path, &pathLength, earthIndex, centauriIndex);
+
+  debug("Shortest path from Earth to Centauri: ");
+  for(int i = 0; i < pathLength - 2; i++) {
+    append("%s -> ", stationNetwork->stations[i]);
+  }
+
+  append("%s\n", stationNetwork->stations[pathLength - 1]);
+
+  //printStationNetworkInfo(stationNetwork);
+
+  //printStationNetwork(stationNetwork);
 
   getchar();
 

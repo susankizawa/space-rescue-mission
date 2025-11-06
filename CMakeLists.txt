@@ -24,6 +24,7 @@ set(PROJECT_SOURCES
   src/utils.cpp
   src/logger.cpp
   src/dataLoader.cpp
+  src/dijkstra.cpp
   src/main.cpp
 )
 

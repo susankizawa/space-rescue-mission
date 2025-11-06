@@ -9,7 +9,6 @@
 #define MAX_STATION_NAME_LENGTH 50
 
 typedef struct StationNetwork {
-  int numStations;
   char stations[MAX_SIZE][MAX_STATION_NAME_LENGTH];
   Graph routes;
 } StationNetwork;

@@ -11,14 +11,13 @@
 
 void initializeStationNetwork(StationNetwork* stationNetwork) {
   info("Initializing station network...");
-  stationNetwork->numStations = 0;
-  initializeGraph(&stationNetwork->routes, stationNetwork->numStations, false);
+  initializeGraph(&stationNetwork->routes, 0, false);
   info("Station network initialized!");
 }
 
 void printStationNetwork(StationNetwork* stationNetwork){
   char msg[50];
-  auto& numStations = stationNetwork->numStations;
+  auto& numStations = stationNetwork->routes.numVertices;
   auto& stations = stationNetwork->stations;
   auto& routes = stationNetwork->routes;
   // horizontal header row
@@ -40,20 +39,30 @@ void printStationNetwork(StationNetwork* stationNetwork){
 }
 
 void printStationNetworkInfo(StationNetwork* stationNetwork) {
-  auto& numStations = stationNetwork->numStations;
+  auto& routes = stationNetwork->routes;
+  auto& numStations = routes.numVertices;
+  auto& numRoutes = routes.numEdges;
   auto& stations = stationNetwork->stations;
+  float networkDensity = getGraphDensity(&routes);
 
   debug("Station network info:");
   append("Number of stations: %d\n", numStations);
+  append("Number of routes: %d\n", numRoutes);
+  append("Network density: %.3f\n", networkDensity);
+  append("Level of connectivity: ");
+  if(networkDensity > 0.5)
+    append("Dense\n");
+  else
+    append("Sparse\n");
   append("Stations: ");
-  for(int i = 0; i < stationNetwork->numStations - 1; i++) {
+  for(int i = 0; i < numStations - 1; i++) {
     append("%s, ", stations[i]);
   }
   append("%s\n", stations[numStations - 1]);
 }
  
 int getStationIndex(StationNetwork* stationNetwork, const char stationName[]) {
-  auto& numStations = stationNetwork->numStations;
+  auto& numStations = stationNetwork->routes.numVertices;
   auto& stations = stationNetwork->stations;
   for(int i = 0; i < numStations; i++){
     if(strcmp(stations[i], stationName) == 0)
@@ -63,7 +72,7 @@ int getStationIndex(StationNetwork* stationNetwork, const char stationName[]) {
 }
 
 void addStation(StationNetwork* stationNetwork, const char stationName[]) {
-  auto& numStations = stationNetwork->numStations;
+  auto& numStations = stationNetwork->routes.numVertices;
   auto& stations = stationNetwork->stations;
   auto& routes = stationNetwork->routes;
   strcpy(stations[numStations++], stationName);
