@@ -1,7 +1,7 @@
 #include "config.h"
+#include "logger.h"
 #include "graph.h"
 #include "stationNetwork.h"
-#include "logger.h"
 #include "dataLoader.h"
 #include "dijkstra.h"
 
@@ -54,19 +54,18 @@ int main() {
 
   buildNetworkFromData(stationNetwork, data);
 
-  int earthIndex = getStationIndex(stationNetwork, "Earth");
-  int centauriIndex = getStationIndex(stationNetwork, "Centauri");
-  int path[MAX_SIZE];
-  int pathLength = 0;
+  Path* terraToCentauriPath = (Path*) malloc(sizeof(Path));
 
-  dijkstra(&stationNetwork->routes, path, &pathLength, earthIndex, centauriIndex);
+  initializePath(terraToCentauriPath);
 
-  debug("Shortest path from Earth to Centauri: ");
-  for(int i = 0; i < pathLength - 2; i++) {
-    append("%s -> ", stationNetwork->stations[i]);
-  }
+  getShortestStationPath(stationNetwork, terraToCentauriPath, "Terra", "Centauri");
 
-  append("%s\n", stationNetwork->stations[pathLength - 1]);
+  //removeRoute(stationNetwork, "Geddon", "Gliese");
+  //removeRoute(stationNetwork, "Idris", "Rethor");
+  //removeRoute(stationNetwork, "Rhetor", "Croshaw");
+  //removeRoute(stationNetwork, "Croshaw", "Nul");
+
+  printStationPath(stationNetwork, terraToCentauriPath);
 
   //printStationNetworkInfo(stationNetwork);
 
@@ -74,6 +73,7 @@ int main() {
 
   getchar();
 
+  free(terraToCentauriPath);
   finalizeProgram();
 
   /*

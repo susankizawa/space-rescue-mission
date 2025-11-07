@@ -67,3 +67,30 @@ float getGraphDensity(Graph* graph) {
   int e = graph->numEdges;
   return (float) (2*e) / (v * (v - 1));
 }
+
+void initializePath(Path* path) {
+  path->length = 0;
+
+  for(int i = 0; i < MAX_SIZE; i++) {
+    path->vertices[i] = 0;
+  }
+}
+
+int getOrigin(Path* path) {
+  return path->vertices[0];
+}
+
+int getDestination(Path* path) {
+  return path->vertices[path->length - 1];
+}
+
+void printPath(Path* path) {
+  auto& length = path->length;
+  auto& vertices = path->vertices;
+
+  debug("Path:");
+  for(int i = length - 1; i > 0; i--) {
+    append("%d -> ", vertices[i]);
+  }
+  append("%d\n", vertices[0]);
+}

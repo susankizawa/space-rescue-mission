@@ -41,4 +41,8 @@ void cleanupStationNetwork(StationNetwork* stationNetwork);
 
 void buildNetworkFromData(StationNetwork* stationNetwork, std::vector<Station> stations);
 
+void getShortestStationPath(StationNetwork* stationNetwork, Path* path, const char origin[], const char destination[]);
+
+void printStationPath(StationNetwork* stationNetwork, Path* path);
+
 #endif

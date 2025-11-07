@@ -19,8 +19,6 @@ typedef struct LogMessage {
 
 } LogMessage;
 
-extern std::ofstream currentSessionLog;
-
 LogMessage newLogMessage(const char timestamp[], const char prefix[], const char message);
 
 void initializeLogger();

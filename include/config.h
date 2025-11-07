@@ -4,5 +4,6 @@
 #define MAX_SIZE 100
 #define ENABLE_LOGGER true
 #define ENABLE_DEBUG_MODE true
+#define SILENCE_INFO true
 
 #endif

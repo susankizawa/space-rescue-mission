@@ -77,6 +77,9 @@ void log(const char* prefix, const char* format, ...) {
 }
 
 void info(const char* format, ...) {
+  if(SILENCE_INFO)
+    return;
+
   va_list args;
   va_start(args, format);
   LogMessage msg = buildMessage("INFO", format, args);

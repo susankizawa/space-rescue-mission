@@ -22,12 +22,11 @@ int minDistance(int accumulatedDist[], int finalizedNodes[]) {
   return closestNode;
 }
 
-void dijkstra(Graph* graph, int path[], int* pathLengh, int origin, int destination) {
+void dijkstra(Graph* graph, Path* path, int origin, int destination) {
   int accumulatedDist[graph->numVertices];
   int finalizedNodes[graph->numVertices];
   int parent[graph->numVertices];
-  int pathLength = 0;
-  int v = destination;
+  path->length = 0;
 
   // initializing all nodes with infinite dist
   for(int i = 0; i < graph->numVertices; i++) {
@@ -44,25 +43,21 @@ void dijkstra(Graph* graph, int path[], int* pathLengh, int origin, int destinat
     int closestNode = minDistance(accumulatedDist, finalizedNodes);
     finalizedNodes[closestNode] = 1;
     for(int v = 0; v < graph->numVertices; v++) {
-      debug("closestNode = %d", closestNode);
-      debug("getEdgeWeight(graph, closestNode, v) = %d", getEdgeWeight(graph, closestNode, v));
+      // if node v has already been finalized or isnt connect to the closest node, skip it
       if(finalizedNodes[v] == 1 || getEdgeWeight(graph, closestNode, v) == 0)
         continue;
-
       
-      debug("accumulatedDist[v] = %d", accumulatedDist[v]);
-      //debug("accumulatedDist[closestNode] + getEdgeWeight(graph, closestNode, v) = %d", accumulatedDist[closestNode] + getEdgeWeight(graph, closestNode, v));
-      //if((accumulatedDist[closestNode] + getEdgeWeight(graph, closestNode, v)) < accumulatedDist[v]) {
-        
-      //  accumulatedDist[v] = accumulatedDist[closestNode] +  getEdgeWeight(graph, closestNode, v);
-      //  parent[v] = closestNode;
-      //}
+      if((accumulatedDist[closestNode] + getEdgeWeight(graph, closestNode, v)) < accumulatedDist[v]) {  
+        accumulatedDist[v] = accumulatedDist[closestNode] +  getEdgeWeight(graph, closestNode, v);
+        parent[v] = closestNode;
+      }
     }
   }
 
+  // builds path from destination
+  int v = destination;
   while(v != -1) {
-    path[pathLength++] = v;
-    
+    path->vertices[path->length++] = v;
     v = parent[v];
   }
 }

@@ -1,5 +1,8 @@
 #include "stationNetwork.h"
 
+#include "logger.h"
+#include "dijkstra.h"
+
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -7,7 +10,6 @@
 #include <format>
 #include <sstream>
 
-#include "logger.h"
 
 void initializeStationNetwork(StationNetwork* stationNetwork) {
   info("Initializing station network...");
@@ -68,6 +70,7 @@ int getStationIndex(StationNetwork* stationNetwork, const char stationName[]) {
     if(strcmp(stations[i], stationName) == 0)
       return i;
   }
+  warning("Couldn't find station %s.", stationName);
   return -1;
 }
 
@@ -88,7 +91,7 @@ void addRoute(StationNetwork* stationNetwork, const char origin[], const char de
   info("Added route from %s to %s.", origin, destination);
 }
  
-void removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[], int weight) {
+void removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]) {
   auto& routes = stationNetwork->routes;
   int originIndex = getStationIndex(stationNetwork, origin);
   int destinationIndex = getStationIndex(stationNetwork, destination);
@@ -115,4 +118,23 @@ void buildNetworkFromData(StationNetwork* stationNetwork, std::vector<Station> s
       addRoute(stationNetwork, origin.name, connection.destination, connection.weight);
     }
   }
+}
+
+void getShortestStationPath(StationNetwork* stationNetwork, Path* path, const char origin[], const char destination[]) {
+  int originIndex = getStationIndex(stationNetwork, origin);
+  int destinationIndex = getStationIndex(stationNetwork, destination);
+  dijkstra(&stationNetwork->routes, path, originIndex, destinationIndex);
+  
+}
+
+void printStationPath(StationNetwork* stationNetwork, Path* path) {
+  auto& stations = stationNetwork->stations;
+  auto& length = path->length;
+  auto& vertices = path->vertices;
+
+  debug("Path:");
+  for(int i = length - 1; i > 0; i--) {
+    append("%s -> ", stations[vertices[i]]);
+  }
+  append("%s\n", stations[vertices[0]]);
 }

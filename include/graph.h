@@ -10,6 +10,11 @@ typedef struct Graph {
   int adjMatrix[MAX_SIZE][MAX_SIZE];
 } Graph;
 
+typedef struct Path {
+  int vertices[MAX_SIZE];
+  int length;
+} Path;
+
 void initializeGraph(Graph* graph, int numVertices, int isDirectional);
 
 void addVertex(Graph* graph);
@@ -25,5 +30,13 @@ void removeEdge(Graph* graph, int u, int v);
 void printMatrix(int matrix[][MAX_SIZE], int width, int height);
 
 float getGraphDensity(Graph* graph);
+
+void initializePath(Path* path);
+
+int getOrigin(Path* path);
+
+int getDestination(Path* path);
+
+void printPath(Path* path);
 
 #endif

@@ -3,6 +3,6 @@
 
 #include "graph.h"
 
-void dijkstra(Graph* graph, int path[], int* pathLengh, int origin, int destination);
+void dijkstra(Graph* graph, Path* path, int origin, int destination);
 
 #endif
