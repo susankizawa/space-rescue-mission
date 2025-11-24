@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # =========================================================================
 # DEPENDENCIES
 # =========================================================================
-add_subdirectory(external/ftxui)
 
 # =========================================================================
 # APPLICATION
@@ -33,13 +32,6 @@ add_executable(space-rescue-mission ${PROJECT_SOURCES})
 
 # Include the include directory
 target_include_directories(space-rescue-mission PRIVATE include)
-
-# Link the executable against the vendored ftxui library
-target_link_libraries(space-rescue-mission PRIVATE
-  ftxui::screen
-  ftxui::dom
-  ftxui::component
-)
 
 # Static libraries so there's no external DLL dependencies
 set(CMAKE_EXE_LINKER_FLAGS "-static")
