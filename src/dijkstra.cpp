@@ -7,15 +7,16 @@
 
 #include <climits>
 
-int minDistance(int accumulatedDist[], int finalizedNodes[]) {
-  int closestNode = INT_MAX;
+int minDistance(int accumulatedDist[], int finalizedNodes[], int numVertices) {
+  int minDist = INT_MAX;
+  int closestNode = -1;
 
   for(int i = 0; i < MAX_SIZE; i++) {
     // if node has already been finalized, skip it
     if(finalizedNodes[i]) 
       continue;
     
-    if(accumulatedDist[i] < closestNode)
+    if(accumulatedDist[i] < minDist)
       closestNode = i;
   }
 
@@ -39,19 +40,30 @@ void dijkstra(Graph* graph, Path* path, int origin, int destination) {
   parent[origin] = -1;
 
   // finding shortest paths
-  for(int count = 0; count < graph->numVertices - 1; count++) {
-    int closestNode = minDistance(accumulatedDist, finalizedNodes);
+  for(int count = 0; count < graph->numVertices; count++) {
+    int closestNode = minDistance(accumulatedDist, finalizedNodes, graph->numVertices);
+    
+    if(closestNode == -1) {
+      break;
+    }
+    
     finalizedNodes[closestNode] = 1;
+
     for(int v = 0; v < graph->numVertices; v++) {
       // if node v has already been finalized or isnt connect to the closest node, skip it
       if(finalizedNodes[v] == 1 || getEdgeWeight(graph, closestNode, v) == 0)
         continue;
       
-      if((accumulatedDist[closestNode] + getEdgeWeight(graph, closestNode, v)) < accumulatedDist[v]) {  
+      if((accumulatedDist[closestNode] + getEdgeWeight(graph, closestNode, v)) < accumulatedDist[v]) {
         accumulatedDist[v] = accumulatedDist[closestNode] +  getEdgeWeight(graph, closestNode, v);
         parent[v] = closestNode;
       }
     }
+  }
+  
+  if(accumulatedDist[destination] == INT_MAX) {
+    warning("Origin is not connected to destination.");
+    return;
   }
 
   // builds path from destination
@@ -60,5 +72,7 @@ void dijkstra(Graph* graph, Path* path, int origin, int destination) {
     path->vertices[path->length++] = v;
     v = parent[v];
   }
+
+  reverseArray(path->vertices, path->length);
 }
 

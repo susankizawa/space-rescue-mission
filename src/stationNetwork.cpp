@@ -23,20 +23,20 @@ void printStationNetwork(StationNetwork* stationNetwork){
   auto& stations = stationNetwork->stations;
   auto& routes = stationNetwork->routes;
   // horizontal header row
-  debug("Routes adjacency matrix:");
-  append("%10.10s\t", "");  // empty corner
+  printf("Matriz de adjacências das rotas:\n");
+  printf("%10.10s\t", "");  // empty corner
   for(int i = 0; i < numStations; i++) {
-    append("%-10.10s\t", stations[i]);
+    printf("%-10.10s\t", stations[i]);
   }
-  append("\n");
+  printf("\n");
   for(int i = 0; i < numStations; i++) {
     // vertical header row
-    append("%10.10s\t", stations[i]);
+    printf("%10.10s\t", stations[i]);
     // route connections
     for(int j = 0; j < numStations; j++){
-      append("%-10d\t", routes.adjMatrix[i][j]);
+      printf("%-10d\t", routes.adjMatrix[i][j]);
     }
-    append("\n");
+    printf("\n");
   }
 }
 
@@ -47,20 +47,20 @@ void printStationNetworkInfo(StationNetwork* stationNetwork) {
   auto& stations = stationNetwork->stations;
   float networkDensity = getGraphDensity(&routes);
 
-  debug("Station network info:");
-  append("Number of stations: %d\n", numStations);
-  append("Number of routes: %d\n", numRoutes);
-  append("Network density: %.3f\n", networkDensity);
-  append("Level of connectivity: ");
+  printf("Informações da rede espacial:\n");
+  printf("Número de estações: %d\n", numStations);
+  printf("Número de rotas: %d\n", numRoutes);
+  printf("Densidade da rede: %.3f\n", networkDensity);
+  printf("Nível de conectividade: ");
   if(networkDensity > 0.5)
-    append("Dense\n");
+    printf("Densa\n");
   else
-    append("Sparse\n");
-  append("Stations: ");
+    printf("Esparsa\n");
+  printf("Estações: ");
   for(int i = 0; i < numStations - 1; i++) {
-    append("%s, ", stations[i]);
+    printf("%s, ", stations[i]);
   }
-  append("%s\n", stations[numStations - 1]);
+  printf("%s\n", stations[numStations - 1]);
 }
  
 int getStationIndex(StationNetwork* stationNetwork, const char stationName[]) {
@@ -70,7 +70,7 @@ int getStationIndex(StationNetwork* stationNetwork, const char stationName[]) {
     if(strcmp(stations[i], stationName) == 0)
       return i;
   }
-  warning("Couldn't find station %s.", stationName);
+  //warning("Couldn't find station %s.", stationName);
   return -1;
 }
 
@@ -83,20 +83,42 @@ void addStation(StationNetwork* stationNetwork, const char stationName[]) {
   info("Added station %s.", stationName);
 }
 
-void addRoute(StationNetwork* stationNetwork, const char origin[], const char destination[], int weight) {
+bool addRoute(StationNetwork* stationNetwork, const char origin[], const char destination[], int weight) {
   auto& routes = stationNetwork->routes;
   int originIndex = getStationIndex(stationNetwork, origin);
   int destinationIndex = getStationIndex(stationNetwork, destination);
+
+  if(originIndex == -1) {
+    error("Couldn't find origin station %s.", origin);
+    return false;
+  }
+  if(destinationIndex == -1) {
+    error("Couldn't find destination station %s.", destination);
+    return false;
+  }
+
   addEdge(&routes, originIndex, destinationIndex, weight);
   info("Added route from %s to %s.", origin, destination);
+  return true;
 }
  
-void removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]) {
+bool removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]) {
   auto& routes = stationNetwork->routes;
   int originIndex = getStationIndex(stationNetwork, origin);
   int destinationIndex = getStationIndex(stationNetwork, destination);
+
+  if(originIndex == -1) {
+    error("Couldn't find origin station %s.", origin);
+    return false;
+  }
+  if(destinationIndex == -1) {
+    error("Couldn't find destination station %s.", destination);
+    return false;
+  }
+
   removeEdge(&routes, originIndex, destinationIndex);
   info("Removed route from %s to %s.", origin, destination);
+  return true;
 }
 
 void cleanupStationNetwork(StationNetwork* stationNetwork) {
@@ -123,8 +145,17 @@ void buildNetworkFromData(StationNetwork* stationNetwork, std::vector<Station> s
 void getShortestStationPath(StationNetwork* stationNetwork, Path* path, const char origin[], const char destination[]) {
   int originIndex = getStationIndex(stationNetwork, origin);
   int destinationIndex = getStationIndex(stationNetwork, destination);
+
+  if(originIndex == -1) {
+    error("Couldn't find origin station %s.", origin);
+    return;
+  }
+  if(destinationIndex == -1) {
+    error("Couldn't find destination station %s.", destination);
+    return;
+  }
+
   dijkstra(&stationNetwork->routes, path, originIndex, destinationIndex);
-  
 }
 
 void printStationPath(StationNetwork* stationNetwork, Path* path) {
@@ -132,9 +163,13 @@ void printStationPath(StationNetwork* stationNetwork, Path* path) {
   auto& length = path->length;
   auto& vertices = path->vertices;
 
-  debug("Path:");
-  for(int i = length - 1; i > 0; i--) {
-    append("%s -> ", stations[vertices[i]]);
+  if(path->length == 0) {
+    printf("Vazio");
+    return;
   }
-  append("%s\n", stations[vertices[0]]);
+
+  for(int i = 0; i < length - 1; i++) {
+    printf("%s -> ", stations[vertices[i]]);
+  }
+  printf("%s\n", stations[vertices[length - 1]]);
 }

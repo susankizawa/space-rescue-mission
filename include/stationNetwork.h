@@ -33,9 +33,9 @@ int getStationIndex(StationNetwork* stationNetwork, const char stationName[]);
  
 void addStation(StationNetwork* stationNetwork, const char stationName[]);
  
-void addRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]);
+bool addRoute(StationNetwork* stationNetwork, const char origin[], const char destination[], int weight);
  
-void removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]);
+bool removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]);
 
 void cleanupStationNetwork(StationNetwork* stationNetwork);
 

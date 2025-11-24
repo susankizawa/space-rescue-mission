@@ -5,24 +5,29 @@
 #include "dataLoader.h"
 #include "dijkstra.h"
 
-#include "ftxui/dom/canvas.hpp"  // for Canvas
-#include "ftxui/dom/node.hpp"    // for Render
-#include "ftxui/screen/color.hpp"  // for Color, Color::Red, Color::Blue, Color::Green, ftxui
-
-#include <cstdio>                 // for getchar
+#include <cstdio>
 #include <cstdlib>
-#include <cstring>
-#include <cmath>                   // for cos
-#include <ftxui/dom/elements.hpp>  // for Fit, canvas, operator|, border, Element
-#include <ftxui/screen/screen.hpp>  // for Pixel, Screen
-#include <vector>                   // for vector, allocator
 
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <iostream>
+enum Screen {
+  MAIN_MENU,
+  SHORTEST_PATH,
+  NETWORK_INFO,
+  ROUTE_MANIPULATION,
+  EXIT
+};
 
 StationNetwork* stationNetwork = (StationNetwork*) malloc(sizeof(StationNetwork));
+
+Screen currentScreen = MAIN_MENU;
+
+void printMenu() {
+  printf("\n=== REDE DE ESTAÇÕES ESPACIAIS ===\n");
+  printf("1. Encontrar caminho mais curto\n");
+  printf("2. Informações da rede\n");
+  printf("3. Bloquear/Desbloquear rota\n");
+  printf("4. Sair\n");
+  printf("Selecione uma opção: ");
+}
 
 void finalizeProgram() {
   cleanupStationNetwork(stationNetwork);
@@ -30,138 +35,100 @@ void finalizeProgram() {
 }
 
 int main() {
-  using namespace ftxui;
-
   initializeStationNetwork(stationNetwork);
 
   initializeLogger();
 
-  /*
-  std::string imagePath = "D:/Projects/C++/space-rescue-mission/images/graph.png"; // Replace with your image path
-
-  #ifdef _WIN32 // For Windows
-      std::string command = "start " + imagePath;
-  #elif __APPLE__ // For macOS
-      std::string command = "open " + imagePath;
-  #else // For Linux/Unix-like systems
-      std::string command = "xdg-open " + imagePath; // or "eog", "gwenview", etc.
-  #endif
-
-  std::system(command.c_str());
-  */
+  Path* shortestPath = (Path*) malloc(sizeof(Path));
 
   std::vector<Station> data = loadNetworkData("../data/estacoeserotas (1) copy.csv");
 
   buildNetworkFromData(stationNetwork, data);
 
-  Path* terraToCentauriPath = (Path*) malloc(sizeof(Path));
+  int select = -1;
 
-  initializePath(terraToCentauriPath);
+  do {
+    printMenu();
 
-  getShortestStationPath(stationNetwork, terraToCentauriPath, "Terra", "Centauri");
+    scanf("%d", &select);
 
-  //removeRoute(stationNetwork, "Geddon", "Gliese");
-  //removeRoute(stationNetwork, "Idris", "Rethor");
-  //removeRoute(stationNetwork, "Rhetor", "Croshaw");
-  //removeRoute(stationNetwork, "Croshaw", "Nul");
+    switch(select) {
+      case SHORTEST_PATH:
+        currentScreen = SHORTEST_PATH;
 
-  printStationPath(stationNetwork, terraToCentauriPath);
+        char origin[MAX_STATION_NAME_LENGTH], destination[MAX_STATION_NAME_LENGTH];
 
-  //printStationNetworkInfo(stationNetwork);
+        initializePath(shortestPath);
 
-  //printStationNetwork(stationNetwork);
+        printf("Nome da estação de origem: ");
+        scanf("%s", origin);
+        printf("Nome da estação de destino: ");
+        scanf("%s", destination);
 
-  getchar();
+        getShortestStationPath(stationNetwork, shortestPath, origin, destination);
 
-  free(terraToCentauriPath);
-  finalizeProgram();
+        printf("Caminho encontrado:\n");
+        printStationPath(stationNetwork, shortestPath);
 
-  /*
-  StationNetwork* sn = (StationNetwork*) malloc(sizeof(StationNetwork));
-  initializeStationNetwork(sn);
-  addStation(sn, "Volt");
-  addStation(sn, "Veritas");
-  addStation(sn, "Vermilion");
-  addStation(sn, "Virgo");
-  addStation(sn, "Vulture");
-  addStation(sn, "Vagabond");
-  addStation(sn, "Vanguard");
-  addStation(sn, "Voodoo");
-  addStation(sn, "Vendetta");
-  addRoute(sn, "Volt", "Veritas");
-  addRoute(sn, "Veritas", "Virgo");
-  addRoute(sn, "Virgo", "Vermilion");
-  printStationNetworkInfo(sn);
-  printf("Routes:\n");
-  printStationNetwork(sn);
-  printf("Pls work\n");
+        break;
+      case NETWORK_INFO:
+        currentScreen = NETWORK_INFO;
+        printStationNetworkInfo(stationNetwork);
+        printStationNetwork(stationNetwork);
+        break;
+      case ROUTE_MANIPULATION:
+        currentScreen = ROUTE_MANIPULATION;
+
+        char origin2[MAX_STATION_NAME_LENGTH], destination2[MAX_STATION_NAME_LENGTH];
+        int select2, weight;
+        select2 = -1;
+
+        printf("Nome da estação de origem: ");
+        scanf("%s", origin2);
+        printf("Nome da estação de destino: ");
+        scanf("%s", destination2);
+
+        printf("1. Bloquear rota\n");
+        printf("2. Desbloquear rota\n");
+        printf("3. Cancelar\n");
+        printf("Selecione uma opção: ");
+
+        scanf("%d", &select2);
+
+        if(select2 == 1) {
+          bool success = removeRoute(stationNetwork, origin2, destination2);
+
+          if(success) {
+            printf("Rota bloqueada com sucesso!");
+          } else {
+            printf("Algum erro aconteceu ao tentar bloquear essa rota.");
+          }
+        } else if(select2 == 2) {
+          printf("Peso da rota: ");
+          scanf("%d", &weight);
+
+          bool success = addRoute(stationNetwork, origin2, destination2, weight);
+
+          if(success) {
+            printf("Rota desbloqueada com sucesso!");
+          } else {
+            printf("Algum erro aconteceu ao tentar desbloquear essa rota.");
+          }
+        }
+
+        break;
+      case EXIT:
+        currentScreen = EXIT;
+        printf("Goodbye!\n");
+        break;
+      default:
+        printf("You've selected an invalid option\n");
+    }
+  } while(select != EXIT);
+
   
-  */
-
-  /*
-  auto c = Canvas(100, 100);
-
-  c.DrawText(0, 0, "My graph:", [](Pixel& p) {
-    p.foreground_color = Color::Red;
-    p.underlined = true;
-  });
-
-  // Triangle:
-  //c.DrawPointLine(10, 10, 80, 10, Color::Red);
-  //c.DrawPointLine(80, 10, 80, 40, Color::Blue);
-  //c.DrawPointLine(80, 40, 10, 10, Color::Green);
-
-  // Circle, not filled and filled:
-  c.DrawPointCircle(50, 50, 20);
-
-  // Plot a function:
-  std::vector<int> ys(100);
-  for (int x = 0; x < 100; x++) {
-    ys[x] = int(80 + 20 * cos(x * 0.2));
-  }
-  for (int x = 0; x < 99; x++) {
-    c.DrawPointLine(x, ys[x], x + 1, ys[x + 1], Color::Red);
-  }
-
-  auto document = canvas(&c) | border;
-
-  auto screen = Screen::Create(Dimension::Fit(document), Dimension::Full());
-  Render(screen, document);
-  screen.Print();
   getchar();
-
-  return 0;
-  */
-
-  /*
-  auto summary = [&] {
-    auto content = vbox({
-        hbox({text(L"- done:   "), text(L"3") | bold}) | color(Color::Green),
-        hbox({text(L"- active: "), text(L"2") | bold}) | color(Color::RedLight),
-        hbox({text(L"- queue:  "), text(L"9") | bold}) | color(Color::Red),
-    });
-    return window(text(L" Summary "), content);
-  };
-
-  auto document =  //
-      vbox({
-          hbox({
-              summary(),
-              summary(),
-              summary() | flex,
-          }),
-          summary(),
-          summary(),
-      });
-
-  // Limit the size of the document to 80 char.
-  document = document | size(WIDTH, LESS_THAN, 80);
-
-  auto screen = Screen::Create(Dimension::Full(), Dimension::Fit(document));
-  Render(screen, document);
-
-  std::cout << screen.ToString() << '\0' << std::endl;
-
-  return EXIT_SUCCESS;
-  */
+  
+  free(shortestPath);
+  finalizeProgram();
 }

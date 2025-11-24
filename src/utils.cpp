@@ -20,3 +20,17 @@ int containsElement(int arr[], int size, int target) {
   }
   return 0; // Element not found
 }
+
+void reverseArray(int array[], int size) {
+  int left = 0;
+  int right = size - 1;
+
+  while(left < right) {
+    int temp = array[left];
+    array[left] = array[right];
+    array[right] = temp;
+
+    left++;
+    right--;
+  }
+}

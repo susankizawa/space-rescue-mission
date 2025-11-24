@@ -89,8 +89,8 @@ void printPath(Path* path) {
   auto& vertices = path->vertices;
 
   debug("Path:");
-  for(int i = length - 1; i > 0; i--) {
+  for(int i = 0; i < length - 1; i++) {
     append("%d -> ", vertices[i]);
   }
-  append("%d\n", vertices[0]);
+  append("%d\n", vertices[length - 1]);
 }
