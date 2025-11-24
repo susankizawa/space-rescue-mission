@@ -9,7 +9,6 @@
 #define MAX_STATION_NAME_LENGTH 50
 
 typedef struct StationNetwork {
-  int numStations;
   char stations[MAX_SIZE][MAX_STATION_NAME_LENGTH];
   Graph routes;
 } StationNetwork;
@@ -34,12 +33,16 @@ int getStationIndex(StationNetwork* stationNetwork, const char stationName[]);
  
 void addStation(StationNetwork* stationNetwork, const char stationName[]);
  
-void addRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]);
+bool addRoute(StationNetwork* stationNetwork, const char origin[], const char destination[], int weight);
  
-void removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]);
+bool removeRoute(StationNetwork* stationNetwork, const char origin[], const char destination[]);
 
 void cleanupStationNetwork(StationNetwork* stationNetwork);
 
 void buildNetworkFromData(StationNetwork* stationNetwork, std::vector<Station> stations);
+
+void getShortestStationPath(StationNetwork* stationNetwork, Path* path, const char origin[], const char destination[]);
+
+void printStationPath(StationNetwork* stationNetwork, Path* path);
 
 #endif

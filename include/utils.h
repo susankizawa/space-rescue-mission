@@ -5,4 +5,8 @@
 
 void getCurrentTimestamp(const char format[], char buffer[], size_t bufferSize);
 
+int containsElement(int arr[], int size, int target);
+
+void reverseArray(int array[], int size);
+
 #endif
